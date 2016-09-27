@@ -1,2 +1,1 @@
-# battikhai
-Loadshedding API
+# Ranga mausam suchana pranaali
