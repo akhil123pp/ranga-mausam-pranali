@@ -5,7 +5,6 @@ from scrape.collect import Fetch
 app = flask.Flask("y-nakh naksa")
 app.debug = True
 
-fObj = Fetch()
 
 
 @app.route("/")
@@ -22,11 +21,13 @@ def infoPage():
 
 @app.route("/api/json/season/")
 def getSeason():
+    fObj = Fetch()
     return flask.jsonify({"dataFound": 1, "season": fObj.getSeason()})
 
 
 @app.route("/api/json/<string:location>")
 def returnWeather(location):
+    fObj = Fetch()
     locData = fObj.getLocations()
     if location.lower() in locData:
         fObj.parsedData[location.lower()].update(
@@ -40,11 +41,13 @@ def returnWeather(location):
 
 @app.route("/api/json/listLocations")
 def listLocations():
+    fObj = Fetch()
     return flask.jsonify({"dataFound": 1, "locations": fObj.getLocations()})
 
 
 @app.route("/api/json/bringUmbrella/<string:location>")
 def bringUmbrella(location):
+    fObj = Fetch()
     data = fObj.parsedData.get(location.lower(), None)
     print data, "data"
     if data is not None:
